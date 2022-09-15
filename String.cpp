@@ -1,18 +1,18 @@
 #include "String.h"
 #include<cstring>
 #include<iostream>
-String::String(): //Конструктор за замовчуванням він встановлює через список ініціалізації вказівнику  nullptr i  length = 0
+String::String(): 
 	str(nullptr),length(0)
 	
 {
 	std::cout << "\t Default Constructor |String()| \n\n";
 }
 
-String::String(const String& other):String() //Конструктор копії перед тим як викликати його ми викликаємо коструктор за замовчуванням
+String::String(const String& other):String() /
 {
 	std::cout << "\t Copy Constructor |String(const String& other)|\n\n";
-	if (other.length != 0)  //Перевіряємо якщо довжина рядка в іншому обєкті не дорівнює нулю
-	{   //Тоді копіюємо довжину, виділяємо пам'ять для рядка і визиваємо функцію strcpy_s -> функцію копіювання
+	if (other.length != 0)  
+	{   
 		this->length = other.length;  
 		str = new char[length + 1];
 		strcpy_s(this->str,length + 1, other.str);
@@ -21,7 +21,7 @@ String::String(const String& other):String() //Конструктор копії перед тим як ви
 
 }
 
-String::String( String&& other)noexcept://Конструктор переносу 
+String::String( String&& other)noexcept:
 	str(other.str), length(other.length)
 {
 	std::cout << "\t Move Constructor |String( String&& other)noexcept|\n"<<std::endl;
@@ -30,42 +30,42 @@ String::String( String&& other)noexcept://Конструктор переносу
 }
 
 
- String::String(const char* str):String()//Конструктор який приймає рядок в стилі С, спочатку ми викликаємо конструктор за замовчуванням
+ String::String(const char* str):String()
 {
 	 std::cout << "\t Constructor |String(const char* str)|\n" << std::endl;
 
-	 if (str != nullptr && std::strlen(str) != 0)  //Перевіряємо якщо вказівник на рядок не дорівнює нулю і довжина не дорівнює нулю
+	 if (str != nullptr && std::strlen(str) != 0)  
 	 {
-		 size_t length = std::strlen(str); //Знаходимо довжину рядка 
-		 this->length = length;          //Копіємо довжину 
-		 this->str = new char [length+1];//Виділяємо пам'ять
+		 size_t length = std::strlen(str); 
+		 this->length = length;          
+		 this->str = new char [length+1];
 
-         strcpy_s(this->str, length + 1, str);   //Копіюємо рядок 
+         strcpy_s(this->str, length + 1, str);  
 	 }
 
 }
- String::String(const char array[], size_t size):String()//конструктор який приймає масив і його розмір  
+ String::String(const char array[], size_t size):String()
  {
 	 std::cout << "\t Constructor |String(const char array[], size_t size)|\n" << std::endl;
-	 if (array!= nullptr && size != 0)//перевірка якщо масив не дорівнює nullptr або розмір масива не дорівнює нулю 
+	 if (array!= nullptr && size != 0)
 	 {
-		length = size;      //ініціалізуємо поле класу  копіюємо довжину  
-		 str = new char[length + 1]; //виділяємо пам'ять для зберігання
-		 for (size_t i = 0; i < length; i++)//проходимось по масиву 
+		length = size;      
+		 str = new char[length + 1];
+		 for (size_t i = 0; i < length; i++)
 			
-			 str[i] = array[i];// копіюємо кожен елемент масиву
+			 str[i] = array[i];
 
 		 str[length] = '\0';
 		
 		}
  }
 
- String::~String()//Деструктор 
+ String::~String()
  {
 	 std::cout << "\t Destructor |~String()|\n" << std::endl;
-	 delete[] str;//видаляє пам'ять 
-	 str = nullptr; //присвоює нульовий вказівник для рядка
-	 length = 0;//присвоює довжині нуль
+	 delete[] str;
+	 str = nullptr; 
+	 length = 0;
  }
 
  
